@@ -29,6 +29,9 @@ public class http1
             return new BadRequestObjectResult("The 'URL' environment variable is not set.");
         }
 
+        var separator = url.Contains('?') ? "&" : "?";
+        url = $"{url}{separator}api-version=2016-10-01";
+
         var payload = new { test = "testvalue" };
         var json = JsonSerializer.Serialize(payload);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
